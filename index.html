@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Office-Supply</title>
+</head>
+<body>
+
+<div id="main-content">
+    <h1>Office Supply</h1>
+
+    <div id="create-supply">
+
+
+        <h2>Create supply demand</h2>
+
+        <form id="create-supply-form">
+            <label for="supply-department">Dep.</label><input type="text" id="supply-department"
+                                                                     placeholder="Enter department namen">
+            <label for="supply-name">Desc</label><input type="text" id="supply-name"
+                                                                placeholder="Enter supply name">
+            <label for="quantity-pcs-pcks">Quantity</label><input type="number" id="quantity-pcs-pcks"
+                                                                   placeholder="Enter quantity">
+            <label for="supply-unit-price">Price</label><input type="number" id="supply-unit-price"
+                                                                     placeholder="Enter unit price">
+            <label for="value-RON">Value</label><input type="number" id="value-RON" placeholder="Value-RON">
+            <label for="delivery-date">Del-Date</label><input type="date" id="delivery-date">
+
+            <input type="submit" value="Save">
+
+        </form>
+
+    </div>
+
+    <div id="existing-supplies">
+
+        <table id="supplies">
+            <thead>
+            <tr>
+                <th>Department</th>
+                <th>SupplyName</th>
+                <th>QuantitypcsPkgs</th>
+                <th>UnitPrice</th>
+                <th>ValueRON</th>
+                <th>DeliveryDate</th>
+                <th>Completed</th>
+                <th>Actions</th>
+            </tr>
+            </thead>
+        </table>
+
+        <tbody>
+        <tr>
+            <td>Sale</td>
+            <td>paper</td>
+            <td>5</td>
+            <td>10</td>
+            <td>50</td>
+            <td>2021-12-02</td>
+            <td><input type="checkbox" class="mark-done"></td>
+            <td><a href="#" class="delete-link">X</a></td>
+        </tr>
+
+        <tr>
+            <td>HR</td>
+            <td>paper</td>
+            <td>5</td>
+            <td>10</td>
+            <td>50</td>
+            <td>2021-12-05</td>
+            <td><input type="checkbox" class="mark-done"></td>
+            <td><a href="#" class="delete-link">X</a></td>
+        </tr>
+
+        <tr>
+            <td>Logistic</td>
+            <td>paper</td>
+            <td>5</td>
+            <td>10</td>
+            <td>50</td>
+            <td>2021-12-12</td>
+            <td><input type="checkbox" class="mark-done"></td>
+            <td><a href="#" class="delete-link">X</a></td>
+        </tr>
+        </tbody>
+
+    </div>
+
+</div>
+</body>
+</html>
