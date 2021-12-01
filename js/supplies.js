@@ -41,6 +41,16 @@ window.OfficeSupply = {
     },
 
     getSupplyDemandRow: function (supply) {
+        let formattedDeliveryDate = new Date(...supply.deliveryDate).toLocaleDateString("ro");
+        //ternary operator
+        let checkedAttribute = supply.completed ? "checked" : "";
+
+        // if (supply.completed) {
+        //     checkedAttribute = "checked";
+        //     }else {
+        //     checkedAttribute = "";
+        // }
+
         return `
            <tr>
                 <td>${supply.department}</td>
@@ -48,8 +58,8 @@ window.OfficeSupply = {
                 <td>${supply.quantityPcsPckgs}</td>
                 <td>${supply.supplyUnitPrice}</td>
                 <td>${supply.valueRON}</td>
-                <td>${supply.deliveryDate}</td>
-                <td><input type="checkbox" class="mark-done" data-id=${supply.id}></td>
+                <td>${formattedDeliveryDate}</td>
+                <td><input type="checkbox" class="mark-done" data-id=${supply.id} ${checkedAttribute}></td>
                 <td><a href="#" class="delete-link" data-id=${supply.id}><i class="fas fa-trash-alt"></i></a></td>
             </tr>
         `
@@ -61,7 +71,6 @@ window.OfficeSupply = {
 
         $('#supplies tbody').html(suppliesHtml);
     },
-
 
     bindEvents: function () {
         $('#create-supply-form').submit(function (event) {
