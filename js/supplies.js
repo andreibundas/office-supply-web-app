@@ -26,18 +26,50 @@ window.OfficeSupply = {
             contentType: "application/json",
             data: JSON.stringify(body)
         }).done(function () {
-            console.log('success');
+            OfficeSupply.getSupplyDemands();
+            // console.log('success');
         });
     },
+
+    getSupplyDemands: function () {
+        $.ajax({
+            url: OfficeSupply.API_URL,
+            method: "GET",
+        }).done(function (response) {
+            OfficeSupply.displaySupplyDemands(JSON.parse(response));
+        })
+    },
+
+    getSupplyDemandRow: function (supply) {
+        return `
+           <tr>
+                <td>${supply.department}</td>
+                <td>${supply.supplyName}</td>
+                <td>${supply.quantityPcsPckgs}</td>
+                <td>${supply.supplyUnitPrice}</td>
+                <td>${supply.valueRON}</td>
+                <td>${supply.deliveryDate}</td>
+                <td><input type="checkbox" class="mark-done" data-id=${supply.id}></td>
+                <td><a href="#" class="delete-link" data-id=${supply.id}><i class="fas fa-trash-alt"></i></a></td>
+            </tr>
+        `
+    },
+
+    displaySupplyDemands: function (supplies) {
+        let suppliesHtml = '';
+        supplies.forEach(supply => suppliesHtml += OfficeSupply.getSupplyDemandRow(supply));
+
+        $('#supplies tbody').html(suppliesHtml);
+    },
+
 
     bindEvents: function () {
         $('#create-supply-form').submit(function (event) {
             event.preventDefault();
 
             OfficeSupply.createSupplyDemand();
-
         })
     }
 };
-
+OfficeSupply.getSupplyDemands();
 OfficeSupply.bindEvents();
