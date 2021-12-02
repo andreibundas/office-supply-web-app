@@ -40,6 +40,33 @@ window.OfficeSupply = {
         })
     },
 
+
+    updateSupplyDemand: function (id, completed) {
+        let body = {
+            "completed": completed
+        };
+
+        $.ajax({
+            url: OfficeSupply.API_URL + '?id=' + id,
+            method: "PUT",
+            contentType: "application/json",
+            data: JSON.stringify(body)
+        }).done(function () {
+            OfficeSupply.getSupplyDemands();
+        })
+    },
+
+    deleteSupplyDemand: function (id) {
+
+        $.ajax({
+            url: OfficeSupply.API_URL + '?id=' + id,
+            method: "DELETE"
+        }).done(function () {
+            OfficeSupply.getSupplyDemands();
+        })
+
+    },
+
     getSupplyDemandRow: function (supply) {
         let formattedDeliveryDate = new Date(...supply.deliveryDate).toLocaleDateString("ro");
         //ternary operator
@@ -77,7 +104,22 @@ window.OfficeSupply = {
             event.preventDefault();
 
             OfficeSupply.createSupplyDemand();
-        })
+
+        });
+
+            $('#supplies').delegate('.mark-done', 'change', function (event) {
+                event.preventDefault();
+                const id = $(this).data('id');
+                const checkboxChecked = $(this).is(':checked');
+                OfficeSupply.updateSupplyDemand(id, checkboxChecked);
+            });
+
+            $('#supplies').delegate('.delete-link', 'click', function (event) {
+                event.preventDefault();
+                const id = $(this).data("id");
+
+                OfficeSupply.deleteSupplyDemand(id);
+            })
     }
 };
 OfficeSupply.getSupplyDemands();
